@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#f5f7fb">
+<meta name="description" content="نووا گیم، یه سایت سبک برای گفت و گو میون بچه های گیمفا">
+<meta name="author" content="Aria Azizi">
+<title>Nova Game | نووا گیم</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- ═══════════════════════════════════
+     هدر
+═══════════════════════════════════ -->
+<header class="nav-shell" id="navShell">
+    <div class="nav-inner">
+
+        <div class="nav-left">
+            <button class="icon-btn menu-btn" id="menuBtn" aria-label="باز کردن منو" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 6h18M3 12h18M3 18h18"/>
+                </svg>
+            </button>
+
+            <a href="#" class="brand" data-nav="home">
+                <span class="brand-mark">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2 L4 7 L4 17 L12 22 L20 17 L20 7 Z"/>
+                        <path d="M12 2 L12 22"/>
+                        <path d="M4 7 L20 17"/>
+                        <path d="M20 7 L4 17"/>
+                    </svg>
+                </span>
+                <span class="brand-text">
+                    <strong>نووا گیم</strong>
+                    <small>NOVA GAME</small>
+                </span>
+            </a>
+        </div>
+
+        <div class="nav-right">
+            <button class="icon-btn" id="searchBtn" aria-label="جستجو" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.3-4.3"/>
+                </svg>
+            </button>
+
+            <button class="icon-btn theme-btn" id="themeBtn" aria-label="تغییر تم" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="themeIcon">
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+                </svg>
+            </button>
+
+            <button class="user-btn guest" id="userBtnGuest" aria-label="ورود" type="button">
+                <span>ورود</span>
+            </button>
+
+            <button class="user-btn logged" id="userBtn" hidden aria-label="پنل کاربری" type="button">
+                <span class="user-avatar" id="navAvatar">U</span>
+            </button>
+        </div>
+
+    </div>
+</header>
+
+<!-- ═══════════════════════════════════
+     منوی کشویی
+═══════════════════════════════════ -->
+<div class="drawer" id="drawer" hidden>
+    <div class="drawer-backdrop" id="drawerBackdrop"></div>
+
+    <aside class="drawer-panel" role="dialog" aria-label="منوی اصلی">
+
+        <div class="drawer-head">
+            <div class="drawer-brand">
+                <span class="brand-mark small">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2 L4 7 L4 17 L12 22 L20 17 L20 7 Z"/>
+                        <path d="M12 2 L12 22"/>
+                        <path d="M4 7 L20 17"/>
+                        <path d="M20 7 L4 17"/>
+                    </svg>
+                </span>
+                <strong>نووا گیم</strong>
+            </div>
+            <button class="icon-btn" id="drawerClose" aria-label="بستن" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6 6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="drawer-user" id="drawerUser" hidden>
+            <div class="user-avatar big" id="drawerAvatar">U</div>
+            <div class="drawer-user-info">
+                <strong id="drawerName">کاربر</strong>
+                <small id="drawerUsername">user</small>
+            </div>
+        </div>
+
+        <nav class="drawer-nav" id="drawerNav">
+            <button class="drawer-item" data-nav="cinema" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="2"/>
+                    <path d="M8 21h8M12 17v4"/>
+                </svg>
+                <span>سینما</span>
+            </button>
+
+            <button class="drawer-item" data-nav="games" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="6" width="20" height="12" rx="3"/>
+                    <path d="M7 12h2m-1-1v2M15 11h.01M17 13h.01"/>
+                </svg>
+                <span>بازی</span>
+            </button>
+
+            <button class="drawer-item expandable" id="drawerForumBtn" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                </svg>
+                <span>انجمن</span>
+                <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m6 9 6 6 6-6"/>
+                </svg>
+            </button>
+
+            <div class="drawer-sub" id="drawerForumSub">
+                <button class="drawer-item sub" data-nav="users" type="button">
+                    <span>کاربران</span>
+                </button>
+                <button class="drawer-item sub" data-nav="activity" type="button">
+                    <span>همه فعالیت‌ها</span>
+                </button>
+                <button class="drawer-item sub" data-nav="groups" type="button">
+                    <span>همه گروه‌ها</span>
+                </button>
+            </div>
+
+            <button class="drawer-item expandable" id="drawerMoreBtn" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="1"/>
+                    <circle cx="12" cy="5" r="1"/>
+                    <circle cx="12" cy="19" r="1"/>
+                </svg>
+                <span>بیشتر</span>
+                <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m6 9 6 6 6-6"/>
+                </svg>
+            </button>
+
+            <div class="drawer-sub" id="drawerMoreSub">
+                <button class="drawer-item sub" data-nav="about" type="button">
+                    <span>درباره ما</span>
+                </button>
+            </div>
+        </nav>
+
+        <div class="drawer-footer">
+            <button class="btn-primary full" id="drawerLoginBtn" type="button">ورود یا ثبت‌نام</button>
+        </div>
+
+    </aside>
+</div>
+
+<!-- ═══════════════════════════════════
+     محتوای اصلی
+═══════════════════════════════════ -->
+<main id="app">
+
+    <!-- ═══ صفحه اصلی ═══ -->
+    <div class="page active" id="page-home">
+
+        <!-- هیرو -->
+        <section class="hero">
+            <div class="container hero-inner">
+                <h1 class="hero-title">
+                    جایی برای گیمفایی‌ها
+                    <span class="accent">که حال کنن</span>
+                </h1>
+                <p class="hero-text">
+                    اخبار بازی، نقد، سینما و یه انجمن که می‌تونی توش گپ بزنی و رفیق پیدا کنی
+                </p>
+                <div class="hero-actions">
+                    <button class="btn-primary" data-nav="explore" type="button">
+                        <span>شروع کن</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                    </button>
+                    <button class="btn-ghost" data-nav="about" type="button">درباره ما</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش ویژه -->
+        <section class="featured-section">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2 class="section-title">پست‌های ویژه</h2>
+                        <p class="section-sub">منتخب تیم نووا</p>
+                    </div>
+                    <div class="filter-bar" id="postFilters">
+                        <button class="filter-chip active" data-filter="all" type="button">همه</button>
+                        <button class="filter-chip" data-filter="editor" type="button">انتخاب سردبیر</button>
+                        <button class="filter-chip" data-filter="discussed" type="button">پر بحث</button>
+                        <button class="filter-chip" data-filter="popular" type="button">محبوب</button>
+                    </div>
+                </div>
+
+                <div class="featured-layout" id="postsGrid"></div>
+            </div>
+        </section>
+
+        <!-- پرطرفدار -->
+        <section class="section">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2 class="section-title">پرطرفدارها</h2>
+                        <p class="section-sub">پربازدیدترین‌های این روزها</p>
+                    </div>
+                    <div class="time-filter" id="timeFilter">
+                        <button class="time-chip active" data-time="day" type="button">امروز</button>
+                        <button class="time-chip" data-time="week" type="button">هفته</button>
+                        <button class="time-chip" data-time="month" type="button">ماه</button>
+                    </div>
+                </div>
+
+                <div class="posts-grid" id="trendingGrid"></div>
+            </div>
+        </section>
+
+        <!-- گروه‌ها -->
+        <section class="section">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2 class="section-title">گروه‌ها</h2>
+                        <p class="section-sub">جایی برای گپ زدن با رفقات</p>
+                    </div>
+                    <button class="btn-ghost small" data-nav="groups" type="button">همه گروه‌ها</button>
+                </div>
+
+                <div class="groups-grid" id="homeGroupsGrid"></div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- ═══ صفحه پست ═══ -->
+    <div class="page" id="page-post">
+        <div class="container post-page">
+            <button class="page-back" data-nav="home" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                <span>بازگشت</span>
+            </button>
+            <div id="postPageContent"></div>
+        </div>
+    </div>
+
+    <!-- ═══ صفحه گروه‌ها ═══ -->
+    <div class="page" id="page-groups">
+        <div class="container section">
+            <button class="page-back" data-nav="home" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                <span>بازگشت</span>
+            </button>
+
+            <div class="section-head">
+                <div>
+                    <h2 class="section-title">گروه‌ها</h2>
+                    <p class="section-sub">با رفقات گپ بزن</p>
+                </div>
+                <button class="btn-primary small" id="createGroupBtn" hidden type="button">گروه جدید</button>
+            </div>
+
+            <div class="group-tabs">
+                <button class="group-tab active" data-groups-tab="all" type="button">همه</button>
+                <button class="group-tab" data-groups-tab="public" type="button">عمومی</button>
+                <button class="group-tab" data-groups-tab="private" type="button">خصوصی</button>
+                <button class="group-tab" data-groups-tab="mine" type="button">مال من</button>
+            </div>
+
+            <div class="groups-grid" id="groupsGrid"></div>
+        </div>
+    </div>
+
+    <!-- ═══ صفحه چت گروه ═══ -->
+    <div class="page" id="page-group">
+        <div class="container group-page">
+            <button class="page-back" data-nav="groups" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                <span>همه گروه‌ها</span>
+            </button>
+            <div id="groupPageContent"></div>
+        </div>
+    </div>
+
+    <!-- ═══ صفحه کاربران ═══ -->
+    <div class="page" id="page-users">
+        <div class="container section">
+            <button class="page-back" data-nav="home" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                <span>بازگشت</span>
+            </button>
+            <div class="section-head">
+                <div>
+                    <h2 class="section-title">کاربران</h2>
+                    <p class="section-sub">رفقای جدید پیدا کن</p>
+                </div>
+            </div>
+            <div class="users-grid" id="usersGrid"></div>
+        </div>
+    </div>
+
+    <!-- ═══ صفحه فعالیت‌ها ═══ -->
+    <div class="page" id="page-activity">
+        <div class="container section">
+            <button class="page-back" data-nav="home" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                <span>بازگشت</span>
+            </button>
+            <div class="section-head">
+                <div>
+                    <h2 class="section-title">فعالیت‌ها</h2>
+                    <p class="section-sub">تازه‌ترین اتفاق‌های سایت</p>
+                </div>
+            </div>
+            <div id="activityList"></div>
+        </div>
+    </div>
+
+    <!-- ═══ صفحه درباره ما ═══ -->
+    <div class="page" id="page-about">
+        <div class="container section">
+            <button class="page-back" data-nav="home" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                <span>بازگشت</span>
+            </button>
+            <div class="about-card">
+                <h2>درباره ما</h2>
+                <p>
+                    یه سایت سبک برای گفت و گو میون بچه های گیمفا، توی اوضاع سخت.
+                </p>
+                <p>
+                    اینجا می‌تونی اخبار بازی و سینما رو بخونی، توی گروه‌ها گپ بزنی،
+                    با بقیه رفیق بشی و کلی حال کنی. بدون دردسر، بدون تبلیغ، فقط برای خودمون.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ صفحه سینما ═══ -->
+    <div class="page" id="page-cinema">
+        <div class="container section">
+            <button class="page-back" data-nav="home" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                <span>بازگشت</span>
+            </button>
+            <div class="section-head">
+                <div>
+                    <h2 class="section-title">سینما</h2>
+                    <p class="section-sub">اخبار فیلم و سریال</p>
+                </div>
+            </div>
+            <div class="empty-state" id="cinemaEmpty">
+                <h3>به‌زودی</h3>
+                <p>اخبار سینما اینجا نمایش داده می‌شه</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ صفحه بازی ═══ -->
+    <div class="page" id="page-games">
+        <div class="container section">
+            <button class="page-back" data-nav="home" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                <span>بازگشت</span>
+            </button>
+            <div class="section-head">
+                <div>
+                    <h2 class="section-title">بازی‌ها</h2>
+                    <p class="section-sub">اخبار و نقد بازی</p>
+                </div>
+            </div>
+            <div class="empty-state" id="gamesEmpty">
+                <h3>به‌زودی</h3>
+                <p>بخش بازی‌ها اینجا نمایش داده می‌شه</p>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<!-- ═══════════════════════════════════
+     فوتر
+═══════════════════════════════════ -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="brand">
+                    <span class="brand-mark small">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2 L4 7 L4 17 L12 22 L20 17 L20 7 Z"/>
+                            <path d="M12 2 L12 22"/>
+                            <path d="M4 7 L20 17"/>
+                            <path d="M20 7 L4 17"/>
+                        </svg>
+                    </span>
+                    <span class="brand-text">
+                        <strong>نووا گیم</strong>
+                        <small>NOVA GAME</small>
+                    </span>
+                </div>
+                <p class="footer-about">
+                    یه سایت سبک برای گفت و گو میون بچه های گیمفا، توی اوضاع سخت.
+                </p>
+            </div>
+
+            <div class="footer-col">
+                <h4>بخش‌ها</h4>
+                <ul>
+                    <li><button data-nav="home" type="button">صفحه اصلی</button></li>
+                    <li><button data-nav="cinema" type="button">سینما</button></li>
+                    <li><button data-nav="games" type="button">بازی</button></li>
+                    <li><button data-nav="groups" type="button">گروه‌ها</button></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>لینک‌های مفید</h4>
+                <ul>
+                    <li><button data-nav="about" type="button">درباره ما</button></li>
+                    <li><button data-nav="users" type="button">کاربران</button></li>
+                    <li><button data-nav="activity" type="button">فعالیت‌ها</button></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>کلیه حقوق این سایت محفوظ است. ۱۴۰۴ نووا گیم</p>
+            <p>ساخته شده توسط <strong>آریا عزیزی</strong></p>
+        </div>
+    </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="بازگشت به بالا" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+</button>
+
+<!-- ═══════════════════════════════════
+     پنل کاربری
+═══════════════════════════════════ -->
+<aside class="user-panel" id="userPanel" aria-label="پنل کاربری">
+    <div class="user-panel-head">
+        <h3>حساب من</h3>
+        <button class="icon-btn" id="userPanelClose" aria-label="بستن" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 6 6 18M6 6l12 12"/>
+            </svg>
+        </button>
+    </div>
+
+    <div class="user-panel-tabs" id="userPanelTabs">
+        <button class="up-tab active" data-up-tab="activity" type="button">
+            <span>فعالیت</span>
+        </button>
+        <button class="up-tab" data-up-tab="profile" type="button">
+            <span>پروفایل</span>
+        </button>
+        <button class="up-tab" data-up-tab="notifications" type="button">
+            <span>اعلانات</span>
+            <span class="tab-count" id="upNotifCount" hidden>0</span>
+        </button>
+        <button class="up-tab" data-up-tab="messages" type="button">
+            <span>پیام‌ها</span>
+            <span class="tab-count" id="upMsgCount" hidden>0</span>
+        </button>
+        <button class="up-tab" data-up-tab="friends" type="button">
+            <span>دوستان</span>
+            <span class="tab-count" id="upFriendCount" hidden>0</span>
+        </button>
+        <button class="up-tab" data-up-tab="groups" type="button">
+            <span>گروه‌ها</span>
+        </button>
+    </div>
+
+    <div class="user-panel-body" id="userPanelBody"></div>
+</aside>
+
+<!-- ═══════════════════════════════════
+     مودال ورود / ثبت‌نام
+═══════════════════════════════════ -->
+<div class="modal-overlay" id="authOverlay" hidden>
+    <div class="modal-backdrop" data-close="auth"></div>
+
+    <div class="modal-card">
+        <button class="modal-close" data-close="auth" aria-label="بستن" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 6 6 18M6 6l12 12"/>
+            </svg>
+        </button>
+
+        <div class="auth-brand">
+            <div class="auth-logo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2 L4 7 L4 17 L12 22 L20 17 L20 7 Z"/>
+                    <path d="M12 2 L12 22"/>
+                    <path d="M4 7 L20 17"/>
+                    <path d="M20 7 L4 17"/>
+                </svg>
+            </div>
+            <h2>نووا گیم</h2>
+            <p>به جمع ما خوش اومدی</p>
+        </div>
+
+        <div class="auth-tabs">
+            <button class="auth-tab active" data-auth-tab="login" type="button">ورود</button>
+            <button class="auth-tab" data-auth-tab="register" type="button">ثبت‌نام</button>
+        </div>
+
+        <form class="auth-form active" id="loginForm" data-auth-form="login">
+            <div class="input-group">
+                <label>نام کاربری</label>
+                <input type="text" name="username" placeholder="نام کاربری" required autocomplete="username" dir="ltr">
+            </div>
+
+            <div class="input-group">
+                <label>رمز عبور</label>
+                <input type="password" name="password" placeholder="رمز عبور" required autocomplete="current-password">
+            </div>
+
+            <button type="submit" class="btn-primary full">ورود</button>
+
+            <p class="auth-hint">
+                حساب نداری؟
+                <button type="button" data-switch-auth="register">ثبت‌نام کن</button>
+            </p>
+        </form>
+
+        <form class="auth-form" id="registerForm" data-auth-form="register" hidden>
+            <div class="input-group">
+                <label>نام کاربری</label>
+                <input type="text" name="username" placeholder="مثلا aria_azizi" required pattern="[A-Za-z][A-Za-z0-9_]{2,19}" autocomplete="username" dir="ltr">
+                <small>فقط حروف انگلیسی، اعداد و آندرلاین. ۳ تا ۲۰ کاراکتر.</small>
+            </div>
+
+            <div class="input-group">
+                <label>اسم نمایشی</label>
+                <input type="text" name="displayName" placeholder="مثلا آریا" required>
+            </div>
+
+            <div class="input-group">
+                <label>رمز عبور</label>
+                <input type="password" name="password" placeholder="حداقل ۶ کاراکتر" required minlength="6" autocomplete="new-password">
+            </div>
+
+            <div class="input-group">
+                <label>پلتفرم اصلی</label>
+                <div class="platform-picker">
+                    <label class="platform-chip">
+                        <input type="radio" name="platform" value="ps5">
+                        <span>PS5</span>
+                    </label>
+                    <label class="platform-chip">
+                        <input type="radio" name="platform" value="xbox">
+                        <span>Xbox</span>
+                    </label>
+                    <label class="platform-chip">
+                        <input type="radio" name="platform" value="switch">
+                        <span>Switch</span>
+                    </label>
+                    <label class="platform-chip">
+                        <input type="radio" name="platform" value="pc" checked>
+                        <span>PC</span>
+                    </label>
+                    <label class="platform-chip">
+                        <input type="radio" name="platform" value="mobile">
+                        <span>موبایل</span>
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary full">ساخت حساب</button>
+        </form>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     مودال ساخت گروه
+═══════════════════════════════════ -->
+<div class="modal-overlay" id="groupModalOverlay" hidden>
+    <div class="modal-backdrop" data-close="group"></div>
+
+    <div class="modal-card">
+        <button class="modal-close" data-close="group" aria-label="بستن" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 6 6 18M6 6l12 12"/>
+            </svg>
+        </button>
+
+        <h2 class="modal-title">گروه جدید</h2>
+
+        <form id="groupForm">
+            <div class="input-group">
+                <label>اسم گروه</label>
+                <input type="text" name="name" placeholder="مثلا گیمفا لند" required>
+            </div>
+
+            <div class="input-group">
+                <label>توضیحات</label>
+                <textarea name="description" placeholder="یه توضیح کوتاه درباره گروه"></textarea>
+            </div>
+
+            <div class="input-group">
+                <label>نوع گروه</label>
+                <div class="platform-picker">
+                    <label class="platform-chip">
+                        <input type="radio" name="type" value="public" checked>
+                        <span>عمومی</span>
+                    </label>
+                    <label class="platform-chip">
+                        <input type="radio" name="type" value="private">
+                        <span>خصوصی</span>
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary full">ساخت گروه</button>
+        </form>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     مودال تنظیمات گروه
+═══════════════════════════════════ -->
+<div class="modal-overlay" id="groupSettingsOverlay" hidden>
+    <div class="modal-backdrop" data-close="groupSettings"></div>
+
+    <div class="modal-card wide">
+        <button class="modal-close" data-close="groupSettings" aria-label="بستن" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 6 6 18M6 6l12 12"/>
+            </svg>
+        </button>
+        <h2 class="modal-title">تنظیمات گروه</h2>
+        <div id="groupSettingsBody"></div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     مودال جستجو
+═══════════════════════════════════ -->
+<div class="modal-overlay" id="searchOverlay" hidden>
+    <div class="modal-backdrop" data-close="search"></div>
+
+    <div class="modal-card">
+        <button class="modal-close" data-close="search" aria-label="بستن" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 6 6 18M6 6l12 12"/>
+            </svg>
+        </button>
+
+        <div class="search-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.3-4.3"/>
+            </svg>
+            <input type="text" id="searchInput" placeholder="جستجو در پست‌ها، کاربران و گروه‌ها" autocomplete="off">
+        </div>
+
+        <div class="search-results" id="searchResults">
+            <p class="search-hint">شروع به تایپ کن تا نتایج رو ببینی</p>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     ادیتور پست
+═══════════════════════════════════ -->
+<div class="editor-fullscreen" id="editorFullscreen" hidden>
+
+    <div class="editor-topbar">
+        <div class="editor-topbar-title" id="editorTitleText">پست جدید</div>
+        <div class="editor-topbar-actions">
+            <button class="btn-ghost small" id="editorSaveDraftBtn" type="button">ذخیره پیش‌نویس</button>
+            <button class="btn-primary small" id="editorPublishBtn" type="button">انتشار</button>
+            <button class="icon-btn" id="editorCloseBtn" aria-label="بستن" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6 6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="editor-main">
+        <div class="editor-content-area">
+            <input type="text" class="editor-title-input" id="editorTitle" placeholder="عنوان پست">
+
+            <div class="editor-toolbar">
+                <button type="button" data-cmd="bold" title="ضخیم"><b>B</b></button>
+                <button type="button" data-cmd="italic" title="کج"><i>I</i></button>
+                <button type="button" data-cmd="underline" title="زیرخط"><u>U</u></button>
+                <button type="button" data-cmd="strikeThrough" title="خط‌خورده"><s>S</s></button>
+                <span class="sep"></span>
+                <button type="button" data-cmd="formatBlock" data-val="h1" title="سرتیتر ۱">H1</button>
+                <button type="button" data-cmd="formatBlock" data-val="h2" title="سرتیتر ۲">H2</button>
+                <button type="button" data-cmd="formatBlock" data-val="h3" title="سرتیتر ۳">H3</button>
+                <button type="button" data-cmd="formatBlock" data-val="p" title="پاراگراف">P</button>
+                <span class="sep"></span>
+                <button type="button" data-cmd="insertUnorderedList" title="لیست">لیست</button>
+                <button type="button" data-cmd="insertOrderedList" title="شماره‌دار">۱.</button>
+                <button type="button" data-cmd="formatBlock" data-val="blockquote" title="نقل قول">نقل</button>
+                <span class="sep"></span>
+                <button type="button" id="toolbarImage" title="تصویر">تصویر</button>
+                <button type="button" id="toolbarLink" title="لینک">لینک</button>
+                <button type="button" id="toolbarCode" title="کد">کد</button>
+                <button type="button" id="toolbarSpoiler" title="اسپویلر">اسپویلر</button>
+                <span class="sep"></span>
+                <button type="button" data-cmd="removeFormat" title="حذف استایل">حذف</button>
+            </div>
+
+            <div class="editor-content" id="editorContent" contenteditable="true" data-placeholder="شروع به نوشتن کن"></div>
+        </div>
+
+        <div class="editor-sidebar">
+            <div class="editor-sidebar-group">
+                <label>دسته‌بندی</label>
+                <select id="editorCategory">
+                    <option value="news">خبر</option>
+                    <option value="review">نقد</option>
+                    <option value="guide">راهنما</option>
+                    <option value="cinema">سینما</option>
+                    <option value="game">بازی</option>
+                </select>
+            </div>
+
+            <div class="editor-sidebar-group">
+                <label>پلتفرم</label>
+                <select id="editorPlatform">
+                    <option value="all">همه</option>
+                    <option value="ps5">PS5</option>
+                    <option value="xbox">Xbox</option>
+                    <option value="switch">Switch</option>
+                    <option value="pc">PC</option>
+                    <option value="mobile">موبایل</option>
+                </select>
+            </div>
+
+            <div class="editor-sidebar-group">
+                <label>تگ‌ها (با کاما جدا کن)</label>
+                <input type="text" id="editorTags" placeholder="اکشن، RPG، ماجراجویی">
+            </div>
+
+            <div class="editor-sidebar-group">
+                <label>تصویر شاخص</label>
+                <input type="text" id="editorCover" placeholder="آدرس تصویر" dir="ltr">
+                <button type="button" class="btn-ghost small full" id="editorUploadCover">آپلود تصویر</button>
+            </div>
+
+            <div class="editor-sidebar-group">
+                <label>خلاصه پست</label>
+                <textarea id="editorExcerpt" rows="3" placeholder="خلاصه کوتاه برای نمایش در فید"></textarea>
+            </div>
+
+            <div class="editor-sidebar-group">
+                <label>امتیاز (اختیاری، فقط برای نقد)</label>
+                <input type="number" id="editorScore" min="0" max="10" step="0.1" placeholder="9.5">
+            </div>
+
+            <div class="editor-sidebar-group">
+                <label>انتخاب سردبیر</label>
+                <select id="editorEditorChoice">
+                    <option value="false">خیر</option>
+                    <option value="true">بله</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- ═══════════════════════════════════
+     Toast
+═══════════════════════════════════ -->
+<div class="toast" id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="script.js"></script>
+</body>
+  </html>
